@@ -22,6 +22,14 @@ const mutation = new GraphQLObjectType({
         // email and password come from args (2nd param to resolve)
         return AuthService.signup({ email, password, req });
       }
+    },
+    logout: {
+      type: UserType,
+      resolve(parentValue, args, req) {
+        const { user } = req;
+        req.logout();
+        return user;
+      }
     }
   }
 });
